@@ -1,6 +1,6 @@
 Code.eval_file("mess.exs", (if File.exists?("../../lib/mix/mess.exs"), do: "../../lib/mix/"))
 
-defmodule Ember.MixProject do
+defmodule Community.MixProject do
   use Mix.Project
 
   def project do
@@ -16,7 +16,7 @@ defmodule Ember.MixProject do
     end
     ++
     [
-      app: :ember,
+      app: :community,
       version: "0.0.1",
       elixir: "~> 1.10",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -25,12 +25,12 @@ defmodule Ember.MixProject do
       aliases: aliases(),
       description: "A flavour of Bonfire",
         homepage_url: "https://bonfirenetworks.org/",
-        source_url: "https://github.com/bonfire-networks/ember",
+        source_url: "https://github.com/bonfire-networks/community",
         package: [
           licenses: ["AGPL-3.0"],
           links: %{
-            "Repository" => "https://github.com/bonfire-networks/ember",
-            "Hexdocs" => "https://hexdocs.pm/ember"
+            "Repository" => "https://github.com/bonfire-networks/community",
+            "Hexdocs" => "https://hexdocs.pm/community"
           }
         ],
         docs: [

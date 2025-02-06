@@ -1,4 +1,4 @@
-defmodule Ember do
+defmodule Community do
   @moduledoc "./README.md" |> File.stream!() |> Enum.drop(1) |> Enum.join()
 
   alias Bonfire.Common.Config
@@ -11,7 +11,7 @@ defmodule Ember do
   #   icon: "bi:app",
   #   description: l("An awesome extension")
   #   # default_nav: [
-  #   #   Ember.Web.HomeLive
+  #   #   Community.Web.HomeLive
   #   # ]
   # )
 

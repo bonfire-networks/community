@@ -1,4 +1,4 @@
-# Ember
+# Community
 
 A new bonfire extension created using [the generator](https://docs.bonfirenetworks.org/create-a-new-extension.html) 
 

@@ -1,4 +1,4 @@
-defmodule Ember.RuntimeConfig do
+defmodule Community.RuntimeConfig do
   # use Bonfire.Common.Localise
 
   @behaviour Bonfire.Common.ConfigModule
@@ -10,7 +10,7 @@ defmodule Ember.RuntimeConfig do
   def config do
     import Config
 
-    # config :ember,
-    #   modularity: System.get_env("ENABLE_ember") || :disabled
+    # config :community,
+    #   modularity: System.get_env("ENABLE_community") || :disabled
   end
 end

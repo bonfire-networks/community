@@ -1,3 +1,3 @@
 import Config
 
-Ember.RuntimeConfig.config()
+Community.RuntimeConfig.config()

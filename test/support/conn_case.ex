@@ -1,4 +1,4 @@
-defmodule Ember.ConnCase do
+defmodule Community.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -26,7 +26,7 @@ defmodule Ember.ConnCase do
       import Bonfire.UI.Common.Testing.Helpers
       import Phoenix.LiveViewTest
 
-      # import Ember.Fake
+      # import Community.Fake
 
       # The default endpoint for testing
       @endpoint Application.compile_env!(:bonfire, :endpoint_module)
@@ -34,7 +34,7 @@ defmodule Ember.ConnCase do
   end
 
   setup tags do
-    import Ember
+    import Community
 
     Bonfire.Common.Test.Interactive.setup_test_repo(tags)
 
