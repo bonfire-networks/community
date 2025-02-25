@@ -25,5 +25,7 @@ config :bonfire_common, :localisation_path, "priv/localisation"
 
 config :bonfire_data_identity, Bonfire.Data.Identity.Credential, hasher_module: Argon2
 
+import_config "../../ember/config/bonfire_data.exs"
+
 import_config "community.exs"
 # import_config "#{Mix.env()}.exs"

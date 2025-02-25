@@ -5,7 +5,7 @@
 /cover/
 
 # The directories Mix and npm download your dependencies to.
-/deps/
+/deps
 /.cache/
 /.hex/
 /.mix/
@@ -43,5 +43,6 @@ npm-debug.log
 deps.path
 /libs/
 /forks
+/extensions
 
 .\#*
