@@ -130,8 +130,11 @@ run_installers() {
             run_installer "$deps_path" "${dep_name}" || \
             exit 1
         else
-            echo "No installers found for dependency: $dep_name"
-            exit 1
+
+            test -d extensions/$dep_name || (mkdir -p extensions && git clone https://github.com/bonfire-networks/$dep_name extensions/$dep_name || echo "Could not clone the $dep_name extension")
+
+            run_installer "$ext_path" "${dep_name}" || \
+            (echo "No installers found for dependency: $dep_name" ; exit 1)
         fi
     done
 }
