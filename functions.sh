@@ -6,38 +6,43 @@ copy_with_prompt() {
     local dest="$2"
     local cwd=$(pwd)
 
-    # If AUTO_YES is true, skip diffing and copy the file directly
-    if [ "$AUTO_YES" = true ]; then
-        cp "$src" "$dest"
-        echo "File copied: $dest"
+    # Check if source and destination are the same file
+    if [ "$(readlink -f "$src")" = "$(readlink -f "$dest")" ]; then
+        echo "Source and destination are identical, skipping: $dest"
     else
-        # Check if destination file exists
-        if [ -f "$dest" ]; then
-            echo "File already exists: $dest"
-
-            # Show diff if files are different
-            if ! diff -w -q "$src" "$dest" >/dev/null 2>&1; then
-                echo "Here's the diff using $(realpath "$src" | sed "s|^$cwd/||"):"
-               if command -v colordiff >/dev/null 2>&1; then
-                    colordiff -u "$dest" "$src" || true
-                else
-                    diff -u "$dest" "$src" | grep -vE '^(---|\+\+\+)' | sed -e '/^@/s/^/\x1b[32m/' -e '/^-/s/^/\x1b[31m/' -e '/^+/s/^/\x1b[34m/' -e 's/$/\x1b[0m/' || true
-                fi
-
-                # Prompt user to confirm overwriting the file
-                read -p "Override existing file? (y/N) " response
-                if [[ "$response" =~ ^[Yy]$ ]]; then
-                    cp "$src" "$dest"
-                    echo "File copied: $dest"
-                else
-                    echo "Skipping: $dest"
-                fi
-            else
-                echo "Files are identical, skipping."
-            fi
-        else
+        # If AUTO_YES is true, skip diffing and copy the file directly
+        if [ "$AUTO_YES" = true ]; then
             cp "$src" "$dest"
             echo "File copied: $dest"
+        else
+            # Check if destination file exists
+            if [ -f "$dest" ]; then
+                echo "File already exists: $dest"
+
+                # Show diff if files are different
+                # if ! diff -w -q "$src" "$dest" >/dev/null 2>&1; then
+                    echo "Here's the diff using $(realpath "$src" | sed "s|^$cwd/||"):"
+                    if command -v colordiff >/dev/null 2>&1; then
+                        colordiff -u "$dest" "$src" || true
+                    else
+                        diff -u "$dest" "$src" | grep -vE '^(---|\+\+\+)' | sed -e '/^@/s/^/\x1b[32m/' -e '/^-/s/^/\x1b[31m/' -e '/^+/s/^/\x1b[34m/' -e 's/$/\x1b[0m/' || true
+                    fi
+
+                    # Prompt user to confirm overwriting the file
+                    read -p "Override existing file? (y/N) " response
+                    if [[ "$response" =~ ^[Yy]$ ]]; then
+                        cp "$src" "$dest"
+                        echo "File copied: $dest"
+                    else
+                        echo "Skipping: $dest"
+                    fi
+                # else
+                #     echo "Files are identical, skipping."
+                # fi
+            else
+                cp "$src" "$dest"
+                echo "File copied: $dest"
+            fi
         fi
     fi
 }
