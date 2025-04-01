@@ -7,12 +7,12 @@ copy_with_prompt() {
     local cwd=$(pwd)
 
     # Check if source and destination are the same file
-    if [ "$(readlink -f "$src")" = "$(readlink -f "$dest")" ]; then
+    if cmp -s "$src" "$dest"; then
         echo "Source and destination are identical, skipping: $dest"
     else
         # If AUTO_YES is true, skip diffing and copy the file directly
         if [ "$AUTO_YES" = true ]; then
-            cp "$src" "$dest"
+            cp -f "$src" "$dest"
             echo "File copied: $dest"
         else
             # Check if destination file exists
@@ -31,7 +31,7 @@ copy_with_prompt() {
                     # Prompt user to confirm overwriting the file
                     read -p "Override existing file? (y/N) " response
                     if [[ "$response" =~ ^[Yy]$ ]]; then
-                        cp "$src" "$dest"
+                        cp -f "$src" "$dest"
                         echo "File copied: $dest"
                     else
                         echo "Skipping: $dest"
@@ -40,7 +40,7 @@ copy_with_prompt() {
                 #     echo "Files are identical, skipping."
                 # fi
             else
-                cp "$src" "$dest"
+                cp -f "$src" "$dest"
                 echo "File copied: $dest"
             fi
         fi
