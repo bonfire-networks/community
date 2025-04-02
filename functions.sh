@@ -8,7 +8,7 @@ copy_with_prompt() {
 
     # Check if source and destination are the same file
     if cmp -s "$src" "$dest"; then
-        echo "Source and destination are identical, skipping: $dest"
+        echo "Source and destination are identical, skipping: $src"
     else
         # If AUTO_YES is true, skip diffing and copy the file directly
         if [ "$AUTO_YES" = true ]; then
