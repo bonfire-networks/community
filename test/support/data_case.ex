@@ -23,6 +23,8 @@ defmodule Community.DataCase do
       import Ecto.Changeset
       import Ecto.Query
       # import Community.DataCase
+
+      @moduletag :backend
     end
   end
 
