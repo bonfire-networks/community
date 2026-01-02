@@ -12,7 +12,7 @@ SOURCE_DIR="$(cd "$(dirname "$0")" && pwd)"
 source "$(dirname "$0")/functions.sh"
 
 # Parse command line arguments
-AUTO_YES=false
+AUTO_YES=${AUTO_YES:-false}
 for arg in "$@"; do
     case $arg in
         -y|--yes)
