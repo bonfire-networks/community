@@ -1,4 +1,4 @@
-let ExtensionHooks = {}; 
+let ExtensionHooks = {};
 
 // NOTE: any extensions included here need to also be added to ./deps.js.sh
 // NOTE: during development you may want to change 'deps' in the path to 'forks', but remember to change it back before committing! 
@@ -23,7 +23,7 @@ let ExtensionHooks = {};
 // import { ComposerHooks } from "./../../deps/bonfire_ui_common/assets/js/composer"
 // import { CodeHooks } from "./../../deps/bonfire_ui_common/assets/js/code"
 
-// import { GeolocateHooks } from "./../../deps/bonfire_geolocate/assets/js/extension"
+import { GeolocateHooks } from "./../../deps/bonfire_geolocate/assets/js/extension"
 // import { KanbanHooks } from "./../../deps/bonfire_ui_kanban/assets/js/extension"
 
 // import { EncryptHooks } from "./../../deps/bonfire_encrypt/assets/js/extension"
@@ -33,6 +33,6 @@ import { NotifyHooks } from "./../../deps/bonfire_notify/assets/js/extension"
 // import LiveSelect from "./../../deps/live_select/assets/js/live_select"
 import LiveSelect from "./../../deps/live_select/priv/static/live_select.min.js"
 
-Object.assign(ExtensionHooks, LiveSelect, NotifyHooks) // CopyHooks, TooltipHooks, EditorCkHooks, EditorQuillHooks
+Object.assign(ExtensionHooks, LiveSelect, NotifyHooks, GeolocateHooks) // CopyHooks, TooltipHooks, EditorCkHooks, EditorQuillHooks
 
 export { ExtensionHooks }

@@ -1,5 +1,19 @@
-# faker = "~> 0.14" # fake data generation
-# jason = "~> 1.0"
-# surface = "~> 0.12.0" # required if there's any JS hooks or CSS components that need to be found by Surface compiler
-# untangle = "~> 0.4"
-# needle = "~> 0.9"
+
+# API 
+absinthe = "~> 1.7.0"
+
+# Auth
+eqrcode = "~> 0.2.1"
+
+# Geo
+geo_postgis = "~> 3.1"
+geo = "~> 4.0"
+
+# Other
+phoenix = "~> 1.8" # note: should match version supported by version of surface used
+phoenix_live_view = "~> 1.1" # usually should let surface or bonfire_ui_common decide the version
+owl = "~> 0.11" # command line UI
+httpoison = "~> 2.1"
+poison = "~> 6.0" # not our preferred one, but some libs use it
+hackney = "~> 1.21"
+rustler_precompiled = "~> 0.8"
