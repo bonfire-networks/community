@@ -5,7 +5,8 @@ bonfire_messages = "https://github.com/bonfire-networks/bonfire_messages"
 bonfire_ui_messages = "https://github.com/bonfire-networks/bonfire_ui_messages"
 
 bonfire_ui_reactions = "https://github.com/bonfire-networks/bonfire_ui_reactions"
-
+bonfire_ui_groups = "https://github.com/bonfire-networks/bonfire_ui_groups"
+bonfire_ui_topics = "https://github.com/bonfire-networks/bonfire_ui_topics"
 bonfire_classify = "https://github.com/bonfire-networks/bonfire_classify"
 
 bonfire_search = "https://github.com/bonfire-networks/bonfire_search"
@@ -30,7 +31,7 @@ bonfire_geolocate = "https://github.com/bonfire-networks/bonfire_geolocate"
 bonfire_translation = "https://github.com/bonfire-networks/bonfire_translation"
 
 # bonfire_pages = "https://github.com/bonfire-networks/bonfire_pages"
-# bonfire_ui_groups = "https://github.com/bonfire-networks/bonfire_ui_groups"
+
 # bonfire_pages_beacon = "https://github.com/bonfire-networks/bonfire_pages_beacon"
 # beacon = "https://github.com/bonfire-networks/beacon#bonfire"
 # beacon = "https://github.com/beaconCMS/beacon"
