@@ -1,6 +1,6 @@
 # bonfire = "https://github.com/bonfire-networks/bonfire"
 ember = "https://github.com/bonfire-networks/ember"
-
+social = "https://github.com/bonfire-networks/social"
 bonfire_messages = "https://github.com/bonfire-networks/bonfire_messages"
 bonfire_ui_messages = "https://github.com/bonfire-networks/bonfire_ui_messages"
 
