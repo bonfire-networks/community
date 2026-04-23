@@ -30,6 +30,8 @@ bonfire_geolocate = "https://github.com/bonfire-networks/bonfire_geolocate"
 
 bonfire_translation = "https://github.com/bonfire-networks/bonfire_translation"
 
+bonfire_ghost = "https://github.com/bonfire-networks/bonfire_ghost"
+
 # bonfire_pages = "https://github.com/bonfire-networks/bonfire_pages"
 
 # bonfire_pages_beacon = "https://github.com/bonfire-networks/bonfire_pages_beacon"
