@@ -51,3 +51,5 @@ needle = "https://github.com/bonfire-networks/needle"
 needle_uid = "https://github.com/bonfire-networks/needle_uid"
 needle_ulid = "https://github.com/bonfire-networks/needle_ulid"
 ex_ulid = "https://github.com/bonfire-networks/ex_ulid"
+
+bonfire_community_rules = "https://github.com/bonfire-networks/bonfire_community_rules"
