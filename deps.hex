@@ -1,6 +1,6 @@
 
 # API 
-absinthe = "~> 1.7.0"
+absinthe = "~> 1.10.1"
 
 # Auth
 eqrcode = "~> 0.2.1"
