@@ -15,5 +15,5 @@ phoenix_live_view = "~> 1.1" # usually should let surface or bonfire_ui_common d
 owl = "~> 0.11" # command line UI
 httpoison = "~> 2.1"
 poison = "~> 6.0" # not our preferred one, but some libs use it
-hackney = "~> 1.21"
+# hackney = "~> 4.0"
 rustler_precompiled = "~> 0.8"
