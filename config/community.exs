@@ -14,3 +14,6 @@ config :bonfire, :ui,
 
 config :bonfire_social, Bonfire.Social.Pins, modularity: true
 config :bonfire_ui_reactions, Bonfire.UI.Reactions.PinActionLive, modularity: true
+
+# enable marking comment as answer?
+config :bonfire_social, Bonfire.Social.Answers, modularity: :disabled
