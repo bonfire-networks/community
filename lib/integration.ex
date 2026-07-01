@@ -7,7 +7,7 @@ defmodule Community do
   # import Bonfire.Common.Modularity.DeclareHelpers
 
   # declare_extension(
-  #   "ExtensionTemplate",
+  #   l("Community"),
   #   icon: "bi:app",
   #   description: l("An awesome extension")
   #   # default_nav: [
