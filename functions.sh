@@ -1,10 +1,32 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# Function to copy with diff and prompt
 copy_with_prompt() {
     local src="$1"
     local dest="$2"
-    local cwd=$(pwd)
+    
+    # If destination is a directory and doesn't have a filename, add the source filename
+    if [ -d "$dest" ] && [ -f "$src" ]; then
+        # Get just the filename from src
+        local filename;
+        filename=$(basename "$src")
+        dest="${dest%/}/$filename"  # Ensure no trailing slash before adding filename
+    fi
+
+    if [ -d "$src" ]; then
+        # If it's a directory, call copy_dir_with_prompt recursively
+        copy_dir_with_prompt "$src" "$dest"
+    elif [ -f "$src" ]; then
+        # If it's a file, call copy_file_with_prompt
+        copy_file_with_prompt "$src" "$dest"
+    fi
+}
+
+# Function to copy file with diff and prompt
+copy_file_with_prompt() {
+    local src="$1"
+    local dest="$2"
+    local cwd;
+    cwd=$(pwd)
 
     # Check if source and destination are the same file
     if cmp -s "$src" "$dest"; then
@@ -29,7 +51,7 @@ copy_with_prompt() {
                     fi
 
                     # Prompt user to confirm overwriting the file
-                    read -p "Override existing file? (y/N) " response
+                    read -r -p "Override existing file? (y/N) " response
                     if [[ "$response" =~ ^[Yy]$ ]]; then
                         cp -f "$src" "$dest"
                         echo "File copied: $dest"
@@ -66,13 +88,7 @@ copy_dir_with_prompt() {
         base_name=$(basename "$src_file")
         dest_file="$dest_dir/$base_name"
 
-        if [ -d "$src_file" ]; then
-            # If it's a directory, call copy_dir_with_prompt recursively
-            copy_dir_with_prompt "$src_file" "$dest_file"
-        elif [ -f "$src_file" ]; then
-            # If it's a file, call copy_with_prompt
-            copy_with_prompt "$src_file" "$dest_file"
-        fi
+        copy_with_prompt "$src_file" "$dest_file"
     done
 }
 
@@ -85,7 +101,7 @@ copy_glob_with_prompt() {
     
     echo "Processing $glob_pattern files"
     shopt -s nullglob
-    files=("$src_dir"/$glob_pattern)
+    files=("$src_dir"/"$glob_pattern")
     
     if [ ${#files[@]} -eq 0 ]; then
         echo "No files found matching $glob_pattern"
@@ -93,10 +109,8 @@ copy_glob_with_prompt() {
     fi
     
     for src_file in "$src_dir"/$glob_pattern; do
-        if [ -f "$src_file" ]; then
-            dest_file="$dest_dir/$(basename "$src_file")"
-            copy_with_prompt "$src_file" "$dest_file"
-        fi
+        dest_file="$dest_dir/$(basename "$src_file")"
+        copy_with_prompt "$src_file" "$dest_file"
     done
 }
 
@@ -136,7 +150,7 @@ run_installers() {
             exit 1
         else
 
-            test -d extensions/$dep_name || (mkdir -p extensions && git clone https://github.com/bonfire-networks/$dep_name extensions/$dep_name || echo "Could not clone the $dep_name extension")
+            test -d extensions/"$dep_name" || (mkdir -p extensions && git clone https://github.com/bonfire-networks/"$dep_name" extensions/"$dep_name" || echo "Could not clone the $dep_name extension")
 
             run_installer "$ext_path" "${dep_name}" || \
             (echo "No installers found for dependency: $dep_name" ; exit 1)
