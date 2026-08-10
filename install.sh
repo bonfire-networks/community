@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Exit on any error
 set -e
@@ -46,5 +46,9 @@ copy_dir_with_prompt "$SOURCE_DIR/priv/repo/" "priv/repo/"
 
 echo -e "\nCopying custom templates..."
 copy_dir_with_prompt "$SOURCE_DIR/priv/templates/lib/" "lib/"
+
+copy_flavour_static "$SOURCE_DIR"
+
+install_flavour_themes "$SOURCE_DIR" "$FLAVOUR"
 
 echo -e "\n$FLAVOUR installation complete!"

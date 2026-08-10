@@ -21,6 +21,15 @@ copy_with_prompt() {
     fi
 }
 
+# Copies $src over $dest, replacing $dest even when it is a symlink.
+# `cp -f` FOLLOWS a symlinked destination and writes into whatever it points at. Since `just flavour_make_symlinks` links config/current_flavour/deps.* at the flavour's own files, a parent flavour's installer (eg. community -> run_installers ember social) would otherwise overwrite the CHILD flavour's source deps.git — and the child's own copy would then no-op ("identical", same inode), silently leaving the parent's dep list in place (this is how bonfire_ui_groups/topics went missing in CI). Unlinking first keeps sources intact and lets the last writer (the flavour being installed) win.
+replace_file() {
+    local src="$1"
+    local dest="$2"
+    rm -f "$dest"
+    cp -f "$src" "$dest"
+}
+
 # Function to copy file with diff and prompt
 copy_file_with_prompt() {
     local src="$1"
@@ -28,13 +37,13 @@ copy_file_with_prompt() {
     local cwd;
     cwd=$(pwd)
 
-    # Check if source and destination are the same file
+    # Check if source and destination are the same file (compare contents, and resolve symlinks so a dest that merely POINTS at src counts as identical)
     if cmp -s "$src" "$dest"; then
         echo "Source and destination are identical, skipping: $src"
     else
         # If AUTO_YES is true, skip diffing and copy the file directly
         if [ "$AUTO_YES" = true ]; then
-            cp -f "$src" "$dest"
+            replace_file "$src" "$dest"
             echo "File copied: $dest"
         else
             # Check if destination file exists
@@ -53,7 +62,7 @@ copy_file_with_prompt() {
                     # Prompt user to confirm overwriting the file
                     read -r -p "Override existing file? (y/N) " response
                     if [[ "$response" =~ ^[Yy]$ ]]; then
-                        cp -f "$src" "$dest"
+                        replace_file "$src" "$dest"
                         echo "File copied: $dest"
                     else
                         echo "Skipping: $dest"
@@ -62,7 +71,7 @@ copy_file_with_prompt() {
                 #     echo "Files are identical, skipping."
                 # fi
             else
-                cp -f "$src" "$dest"
+                replace_file "$src" "$dest"
                 echo "File copied: $dest"
             fi
         fi
@@ -156,6 +165,47 @@ run_installers() {
             (echo "No installers found for dependency: $dep_name" ; exit 1)
         fi
     done
+}
+
+# Copy a flavour's own static assets (if it ships any) into the app's priv/static/
+copy_flavour_static() {
+    local source_dir="$1"
+
+    if [ -d "$source_dir/priv/static/" ]; then
+        echo -e "\nCopying static assets..."
+        copy_dir_with_prompt "$source_dir/priv/static/" "priv/static/"
+    fi
+}
+
+# Append a flavour's themes/theme.css to bonfire_ui_common's custom_themes.css (idempotent: keyed on
+# the flavour name appearing in the file). No-op for flavours that don't ship a themes/theme.css.
+install_flavour_themes() {
+    local source_dir="$1"
+    local flavour="$2"
+
+    [ -f "$source_dir/themes/theme.css" ] || return 0
+
+    echo -e "\nInstalling flavour themes..."
+
+    # NOTE: don't name this loop var `path` — that's a special PATH-linked array in zsh
+    local custom_themes="" candidate
+    for candidate in "extensions/bonfire_ui_common/assets/css/custom_themes.css" "deps/bonfire_ui_common/assets/css/custom_themes.css"; do
+        if [ -f "$candidate" ]; then
+            custom_themes="$candidate"
+            break
+        fi
+    done
+
+    if [ -z "$custom_themes" ]; then
+        echo "Warning: could not find custom_themes.css to install the $flavour themes into"
+    elif grep -q "name: \"$flavour\"" "$custom_themes" 2>/dev/null; then
+        echo "$flavour themes already present in $custom_themes"
+    else
+        echo "Appending $flavour themes to $custom_themes"
+        echo "" >> "$custom_themes"
+        cat "$source_dir/themes/theme.css" >> "$custom_themes"
+        echo "$flavour themes installed"
+    fi
 }
 
 # Function to create multiple directories
