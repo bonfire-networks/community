@@ -30,9 +30,8 @@ let ExtensionHooks = {};
 
 import { NotifyHooks } from "./../../deps/bonfire_notify/assets/js/extension"
 
-// NOTE: path deps live under extensions/, not deps/. Thin shim only; the heavy xterm bundle is
-// fetched on demand from /assets/console_terminal.js
-import { TerminalHooks } from "./../../extensions/bonfire_ui_console/assets/js/terminal.js"
+// thin shim only; the heavy xterm bundle is fetched on demand from /assets/console_terminal.js
+import { TerminalHooks } from "./../../deps/bonfire_ui_console/assets/js/terminal.js"
 
 // import LiveSelect from "./../../deps/live_select/assets/js/live_select"
 import LiveSelect from "./../../deps/live_select/priv/static/live_select.min.js"
