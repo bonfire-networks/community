@@ -177,37 +177,6 @@ copy_flavour_static() {
     fi
 }
 
-# Append a flavour's themes/theme.css to bonfire_ui_common's custom_themes.css (idempotent: keyed on
-# the flavour name appearing in the file). No-op for flavours that don't ship a themes/theme.css.
-install_flavour_themes() {
-    local source_dir="$1"
-    local flavour="$2"
-
-    [ -f "$source_dir/themes/theme.css" ] || return 0
-
-    echo -e "\nInstalling flavour themes..."
-
-    # NOTE: don't name this loop var `path` — that's a special PATH-linked array in zsh
-    local custom_themes="" candidate
-    for candidate in "extensions/bonfire_ui_common/assets/css/custom_themes.css" "deps/bonfire_ui_common/assets/css/custom_themes.css"; do
-        if [ -f "$candidate" ]; then
-            custom_themes="$candidate"
-            break
-        fi
-    done
-
-    if [ -z "$custom_themes" ]; then
-        echo "Warning: could not find custom_themes.css to install the $flavour themes into"
-    elif grep -q "name: \"$flavour\"" "$custom_themes" 2>/dev/null; then
-        echo "$flavour themes already present in $custom_themes"
-    else
-        echo "Appending $flavour themes to $custom_themes"
-        echo "" >> "$custom_themes"
-        cat "$source_dir/themes/theme.css" >> "$custom_themes"
-        echo "$flavour themes installed"
-    fi
-}
-
 # Function to create multiple directories
 create_dirs() {
     echo "Creating directories..."
