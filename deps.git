@@ -27,6 +27,7 @@ bonfire_articles = "https://github.com/bonfire-networks/bonfire_articles"
 
 ## EXPERIMENTAL ##
 bonfire_poll = "https://github.com/bonfire-networks/bonfire_poll"
+bonfire_divlab = "https://github.com/ivanminutillo/bonfire_divlab"
 
 # bonfire_label = "https://github.com/bonfire-networks/bonfire_label"
 
