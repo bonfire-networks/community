@@ -1,6 +1,6 @@
 
-# API 
-absinthe = "~> 1.10.1"
+# API
+absinthe = "~> 1.12"
 
 # Auth
 eqrcode = "~> 0.2.1"
@@ -13,7 +13,7 @@ geo = "~> 4.0"
 phoenix = "~> 1.8" # note: should match version supported by version of surface used
 phoenix_live_view = "~> 1.1" # usually should let surface or bonfire_ui_common decide the version
 owl = "~> 0.11" # command line UI
-httpoison = "~> 2.1"
+httpoison = "~> 3.0"
 poison = "~> 6.0" # not our preferred one, but some libs use it
-# hackney = "~> 4.0"
+hackney = "~> 4.9" # for standalone builds, where ember's override doesn't apply
 rustler_precompiled = "~> 0.8"
