@@ -31,7 +31,7 @@ bonfire_poll = "https://github.com/bonfire-networks/bonfire_poll"
 # bonfire_label = "https://github.com/bonfire-networks/bonfire_label"
 
 bonfire_geolocate = "https://github.com/bonfire-networks/bonfire_geolocate"
-# bonfire_gatherings = "https://github.com/bonfire-networks/bonfire_gatherings"
+bonfire_gatherings = "https://github.com/bonfire-networks/bonfire_gatherings"
 
 bonfire_translation = "https://github.com/bonfire-networks/bonfire_translation"
 
