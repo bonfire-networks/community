@@ -28,7 +28,8 @@ bonfire_articles = "https://github.com/bonfire-networks/bonfire_articles"
 ## EXPERIMENTAL ##
 bonfire_poll = "https://github.com/bonfire-networks/bonfire_poll"
 
-# bonfire_label = "https://github.com/bonfire-networks/bonfire_label"
+# gatherings files event categories configured as labels under its Events label
+bonfire_label = "https://github.com/bonfire-networks/bonfire_label"
 
 bonfire_geolocate = "https://github.com/bonfire-networks/bonfire_geolocate"
 bonfire_gatherings = "https://github.com/bonfire-networks/bonfire_gatherings"
