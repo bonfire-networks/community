@@ -36,7 +36,9 @@ bonfire_gatherings = "https://github.com/bonfire-networks/bonfire_gatherings"
 
 bonfire_translation = "https://github.com/bonfire-networks/bonfire_translation"
 
+# TODO: disable these? included now for CI and beta testing
 bonfire_ghost = "https://github.com/bonfire-networks/bonfire_ghost"
+bonfire_wordpress = "https://github.com/bonfire-networks/bonfire_wordpress"
 
 # bonfire_pages = "https://github.com/bonfire-networks/bonfire_pages"
 
